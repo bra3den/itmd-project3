@@ -29,7 +29,50 @@
     </main>
   </div>
 
-  
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 41.8336, lng: -87.6275 },
+        zoom: 12,
+      });
+
+      const locations = [
+        {
+          position: { lat: 41.8758, lng: -87.6189 },
+          name: "Millennium Park",
+          description: "The best park in Chicago.",
+        },
+        {
+          position: { lat: 41.8663, lng: -87.6068 },
+          name: "Art Institute of Chicago",
+          description: "A pretty cool art museum.",
+        },
+        {
+          position: { lat: 41.8796, lng: -87.6237 },
+          name: "Navy Pier",
+          description: "The best (and only?) ferris wheel in Chicago.",
+        },
+      ];
+
+      locations.forEach((location) => {
+        const marker = new google.maps.Marker({
+          position: location.position,
+          map: map,
+          title: location.name,
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<h3>${location.name}</h3><p>${location.description}</p>`,
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+          document.getElementById("location-name").textContent = location.name;
+          document.getElementById("location-description").textContent = location.description;
+        });
+      });
+    }
+  </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS0VfP7vOPY63IlBmOR72PxwBlBBm7FlY&callback=initMap" async defer></script>
 </body>
 
