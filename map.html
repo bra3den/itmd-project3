@@ -76,6 +76,27 @@
           document.getElementById("location-description").textContent = location.description;
         });
       });
+
+      const geolocationButton = document.getElementById("geolocation-button");
+      geolocationButton.addEventListener("click", () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+              };
+              map.setCenter(userLocation);
+              map.setZoom(15);
+            },
+            (error) => {
+              console.error("Error getting user location:", error);
+            }
+          );
+        } else {
+          console.error("Geolocation is not supported by this browser.");
+        }
+      });
     }
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS0VfP7vOPY63IlBmOR72PxwBlBBm7FlY&callback=initMap"
