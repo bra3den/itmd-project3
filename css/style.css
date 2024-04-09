@@ -176,6 +176,10 @@ Mobile Friendly
 }
 
 #map {
-  height: 80vh;
+  height: 70vh;
   width: 100%;
+}
+
+#geolocation-button {
+  margin-top: 10px;
 }

@@ -21,6 +21,7 @@
     <main id="content-wrapper">
       <h1>My Favorite Locations</h1>
       <div id="map"></div>
+      <button id="geolocation-button">Find My Location</button>
       <div id="location-info">
         <h2>Location Details</h2>
         <p id="location-name"></p>
@@ -41,16 +42,19 @@
           position: { lat: 41.8758, lng: -87.6189 },
           name: "Millennium Park",
           description: "The best park in Chicago.",
+          icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
         },
         {
           position: { lat: 41.8663, lng: -87.6068 },
           name: "Art Institute of Chicago",
           description: "A pretty cool art museum.",
+          icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
         },
         {
           position: { lat: 41.8796, lng: -87.6237 },
           name: "Navy Pier",
           description: "The best (and only?) ferris wheel in Chicago.",
+          icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
         },
       ];
 
@@ -59,6 +63,7 @@
           position: location.position,
           map: map,
           title: location.name,
+          icon: location.icon,
         });
 
         const infoWindow = new google.maps.InfoWindow({
@@ -73,7 +78,8 @@
       });
     }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS0VfP7vOPY63IlBmOR72PxwBlBBm7FlY&callback=initMap" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS0VfP7vOPY63IlBmOR72PxwBlBBm7FlY&callback=initMap"
+    async defer></script>
 </body>
 
 </html>
