@@ -1,106 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Map</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <title>Map</title>
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
+  <body>
+    <div id="page-wrapper">
+      <nav id="main-nav">
+        <ul>
+          <li><a href="index.html">About me</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="bands.html">Bands</a></li>
+          <li><a href="map.html">Map</a></li>
+        </ul>
+      </nav>
+      <main id="content-wrapper">
+        <h1>My Favorite Locations</h1>
+        <div id="map"></div>
+        <button id="geolocation-button">Find My Location</button>
+        <div id="location-info">
+          <h2>Location Details</h2>
+          <p id="location-name"></p>
+          <p id="location-description"></p>
+        </div>
+      </main>
+    </div>
 
-<body>
-  <div id="page-wrapper">
-    <nav id="main-nav">
-      <ul>
-        <li><a href="index.html">About me</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="bands.html">Bands</a></li>
-        <li><a href="map.html">Map</a></li>
-      </ul>
-    </nav>
-    <main id="content-wrapper">
-      <h1>My Favorite Locations</h1>
-      <div id="map"></div>
-      <button id="geolocation-button">Find My Location</button>
-      <div id="location-info">
-        <h2>Location Details</h2>
-        <p id="location-name"></p>
-        <p id="location-description"></p>
-      </div>
-    </main>
-  </div>
-
-  <script>
-    function initMap() {
-      const map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 41.8336, lng: -87.6275 },
-        zoom: 12,
-      });
-
-      const locations = [
-        {
-          position: { lat: 41.8758, lng: -87.6189 },
-          name: "Millennium Park",
-          description: "The best park in Chicago.",
-          icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
-        },
-        {
-          position: { lat: 41.8663, lng: -87.6068 },
-          name: "Art Institute of Chicago",
-          description: "A pretty cool art museum.",
-          icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-        },
-        {
-          position: { lat: 41.8796, lng: -87.6237 },
-          name: "Navy Pier",
-          description: "The best (and only?) ferris wheel in Chicago.",
-          icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
-        },
-      ];
-
-      locations.forEach((location) => {
-        const marker = new google.maps.Marker({
-          position: location.position,
-          map: map,
-          title: location.name,
-          icon: location.icon,
+    <script>
+      function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: 41.8336, lng: -87.6275 },
+          zoom: 12,
         });
 
-        const infoWindow = new google.maps.InfoWindow({
-          content: `<h3>${location.name}</h3><p>${location.description}</p>`,
+        const locations = [
+          {
+            position: { lat: 41.8758, lng: -87.6189 },
+            name: "Millennium Park",
+            description: "The best park in Chicago.",
+            icon: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+          },
+          {
+            position: { lat: 41.8663, lng: -87.6068 },
+            name: "Art Institute of Chicago",
+            description: "A pretty cool art museum.",
+            icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+          },
+          {
+            position: { lat: 41.8796, lng: -87.6237 },
+            name: "Navy Pier",
+            description: "The best (and only?) ferris wheel in Chicago.",
+            icon: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+          },
+        ];
+
+        locations.forEach((location) => {
+          const marker = new google.maps.Marker({
+            position: location.position,
+            map: map,
+            title: location.name,
+            icon: location.icon,
+          });
+
+          const infoWindow = new google.maps.InfoWindow({
+            content: `<h3>${location.name}</h3><p>${location.description}</p>`,
+          });
+
+          marker.addListener("click", () => {
+            infoWindow.open(map, marker);
+            document.getElementById("location-name").textContent =
+              location.name;
+            document.getElementById("location-description").textContent =
+              location.description;
+          });
         });
 
-        marker.addListener("click", () => {
-          infoWindow.open(map, marker);
-          document.getElementById("location-name").textContent = location.name;
-          document.getElementById("location-description").textContent = location.description;
+        const geolocationButton = document.getElementById("geolocation-button");
+        geolocationButton.addEventListener("click", () => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const userLocation = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                };
+                map.setCenter(userLocation);
+                map.setZoom(15);
+              },
+              (error) => {
+                console.error("Error getting user location:", error);
+              }
+            );
+          } else {
+            console.error("Geolocation is not supported by this browser.");
+          }
         });
-      });
-
-      const geolocationButton = document.getElementById("geolocation-button");
-      geolocationButton.addEventListener("click", () => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-              };
-              map.setCenter(userLocation);
-              map.setZoom(15);
-            },
-            (error) => {
-              console.error("Error getting user location:", error);
-            }
-          );
-        } else {
-          console.error("Geolocation is not supported by this browser.");
-        }
-      });
-    }
-  </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS0VfP7vOPY63IlBmOR72PxwBlBBm7FlY&callback=initMap"
-    async defer></script>
-</body>
-
+      }
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS0VfP7vOPY63IlBmOR72PxwBlBBm7FlY&callback=initMap"
+      async
+      defer
+    ></script>
+  </body>
 </html>
