@@ -103,3 +103,72 @@ a:hover {
     font-size: 0.9rem;
   }
 }
+
+/*
+Mobile Friendly
+*/
+@media (max-width: 768px) {
+  #main-nav ul li {
+    display: block;
+  }
+
+  .fixed-width-page #page-wrapper {
+    width: auto;
+  }
+
+  body {
+    font-size: 0.9rem;
+  }
+
+  #content-wrapper {
+    padding: 10px;
+    margin: 10px auto;
+  }
+
+  img {
+    margin: 10px auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  nav {
+    padding: 5px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 0.8rem;
+  }
+
+  #main-nav ul li a {
+    padding: 8px 16px;
+  }
+
+  #content-wrapper {
+    padding: 5px;
+    margin: 5px auto;
+  }
+
+  img {
+    margin: 5px auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    margin-bottom: 5px;
+  }
+}
