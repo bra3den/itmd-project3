@@ -7,6 +7,7 @@ body {
   font-size: 1rem;
   position: sticky;
   float: right;
+  min-width: 100%;
 }
 
 nav {
@@ -46,6 +47,7 @@ nav {
   margin: 20px auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: 'Roboto', 'Open Sans';
+  width: 100%;
 }
 
 img {
@@ -171,4 +173,9 @@ Mobile Friendly
   p {
     margin-bottom: 5px;
   }
+}
+
+#map {
+  height: 80vh;
+  width: 100%;
 }

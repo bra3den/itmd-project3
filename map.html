@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Map</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="page-wrapper">
+    <nav id="main-nav">
+      <ul>
+        <li><a href="index.html">About me</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="map.html">Map</a></li>
+      </ul>
+    </nav>
+    <main id="content-wrapper">
+      <h1>My Favorite Locations</h1>
+      <div id="map"></div>
+      <div id="location-info">
+        <h2>Location Details</h2>
+        <p id="location-name"></p>
+        <p id="location-description"></p>
+      </div>
+    </main>
+  </div>
+
+  
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS0VfP7vOPY63IlBmOR72PxwBlBBm7FlY&callback=initMap" async defer></script>
+</body>
+
+</html>
